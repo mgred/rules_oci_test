@@ -1,0 +1,21 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+
+pkg_tar(
+    name = "www",
+    srcs = ["index.html"],
+    package_dir = "www",
+)
+
+oci_image(
+    name = "image",
+    base = "@althttpd//:image",
+    tars = ["www.tar"],
+    visibility = ["//visibility:public"],
+)
+
+oci_tarball(
+    name = "tarball",
+    image = ":image",
+    repotags = [],
+)
