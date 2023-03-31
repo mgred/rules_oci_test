@@ -4,6 +4,7 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 pkg_tar(
     name = "www",
     srcs = ["index.html"],
+    mode = "444",
     package_dir = "www",
 )
 
